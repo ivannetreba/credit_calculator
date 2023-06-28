@@ -100,8 +100,8 @@
                 type="number"
                 id="amount"
                 placeholder="Введите сумму кредита"
-                min="10000"
-                max="100000000"
+                min="1000"
+                max="100000001"
                 required
             />
         </div>
@@ -113,8 +113,8 @@
                 step="0.01"
                 id="interest"
                 placeholder="Введите процентную ставку"
-                min="0"
-                max="100"
+                min="-10"
+                max="109"
                 required
             />
         </div>
@@ -122,10 +122,12 @@
         <div class="input-container">
             <label>Срок погашения:</label>
             <input
-                type="text"
+                type="number"
                 id="years"
                 placeholder="Введите срок погашения в годах"
-                pattern="[1-9]|[1-2][0-9]|30"
+                min="1"
+                max="35"
+                pattern="[0-9]*"
                 required
             />
         </div>
@@ -188,7 +190,7 @@
             if (amountInput.validity.valueMissing) {
                 amountInput.setCustomValidity("Пожалуйста, введите сумму кредита");
             } else if (amountInput.validity.rangeUnderflow || amountInput.validity.rangeOverflow) {
-                amountInput.setCustomValidity("Сумма кредита должна быть от 10000 до 100000000");
+                amountInput.setCustomValidity("Сумма кредита должна быть от 1000 до 100000001");
             } else {
                 amountInput.setCustomValidity("");
             }
@@ -197,7 +199,7 @@
             if (interestInput.validity.valueMissing) {
                 interestInput.setCustomValidity("Пожалуйста, введите процентную ставку");
             } else if (interestInput.validity.rangeUnderflow || interestInput.validity.rangeOverflow) {
-                interestInput.setCustomValidity("Процентная ставка должна быть от 0 до 100");
+                interestInput.setCustomValidity("Процентная ставка должна быть от -10 до 109");
             } else {
                 interestInput.setCustomValidity("");
             }
@@ -205,8 +207,8 @@
             // Проверка поля "Срок погашения:"
             if (yearsInput.validity.valueMissing) {
                 yearsInput.setCustomValidity("Пожалуйста, введите срок погашения");
-            } else if (yearsInput.validity.patternMismatch) {
-                yearsInput.setCustomValidity("Срок погашения должен быть от 1 до 30");
+            } else if (yearsInput.validity.patternMismatch || yearsInput.validity.rangeUnderflow || yearsInput.validity.rangeOverflow) {
+                yearsInput.setCustomValidity("Срок погашения должен быть от 1 до 35");
             } else {
                 yearsInput.setCustomValidity("");
             }
