@@ -19,8 +19,8 @@
           border-radius: 10px;
           padding: 20px;
           box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-          max-width: 50%; /* Максимальная ширина формы */
-          margin: auto; /* Центрирование формы */
+          max-width: 50%;
+          margin: auto;
         }
 
         label {
@@ -36,35 +36,34 @@
             border-radius: 5px;
             border: none;
             background-color: #f2f2f2;
-            margin-bottom: 20px; /* Изменено с "margin: 0 auto 20px" */
+            margin-bottom: 20px;
             font-size: 16px;
         }
 
         .input-container {
-            max-width: 400px; /* ширина соответствует максимальной ширине поля ввода */
-            margin: auto; /* центрирует контейнер */
-            text-align: left; /* выравнивает текст по левому краю */
+            max-width: 400px;
+            margin: auto;
+            text-align: left;
         }
 
-        input[type="submit"] {
+        .submit-button {
           background-color: #4caf50;
           color: #fff;
-          width: 100%; /* изменение ширины кнопки */
-          padding: 10px; /* изменение отступов внутри кнопки */
+          width: 100%;
+          padding: 10px;
         }
 
-        input[type="submit"]:hover {
+        .submit-button:hover {
           background-color: #3e8e41;
         }
 
-        .result {
+        .result-container {
             background-color: #fff;
             border-radius: 10px;
             padding: 20px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-            margin: 20px auto; /* Центрирование блока результатов */
-            max-width: 50%; /* Максимальная ширина блока результатов */
-            width: 100%; /* Изменение ширины блока результатов */
+            margin: 20px auto;
+            max-width: 50%;
         }
 
         .result h2 {
@@ -100,8 +99,7 @@
             <input
                 type="number"
                 id="amount"
-                placeholder="Введите сумму кред
-            ita"
+                placeholder="Введите сумму кредита"
                 required
             />
         </div>
@@ -127,11 +125,16 @@
             />
         </div>
 
-        <input type="submit" value="Рассчитать" />
+        <input type="submit" value="Рассчитать" class="submit-button" />
     </form>
 
     <!-- Раздел результатов кредитного калькулятора -->
-    <div id="results" class="result"></div>
+    <div id="results" class="result-container">
+        <h2>Результаты</h2>
+        <p>Ежемесячный платеж: <span class="sum"></span></p>
+        <p>Общая сумма платежа: <span class="sum"></span></p>
+        <p>Переплата: <span class="sum"></span></p>
+    </div>
 
     <script>
         // Функция для расчета ежемесячного платежа
@@ -159,17 +162,10 @@
             var totalInterest = (totalPayment - amount).toFixed(2);
 
             // Показываем результаты
-            var html = "<h2>Результаты</h2>";
-            html +=
-                "<p>Ежемесячный платеж: <span class='sum'>" +
-                monthlyPayment +
-                "</span></p>";
-            html +=
-                "<p>Общая сумма платежа: <span class='sum'>" + totalPayment + "</span></p>";
-            html += "<p>Переплата: <span class='sum'>" + totalInterest + "</span></p>";
-
-            // Обновляем раздел результатов
-            document.getElementById("results").innerHTML = html;
+            var resultsContainer = document.getElementById("results");
+            resultsContainer.querySelector(".sum:nth-child(1)").textContent = monthlyPayment;
+            resultsContainer.querySelector(".sum:nth-child(2)").textContent = totalPayment;
+            resultsContainer.querySelector(".sum:nth-child(3)").textContent = totalInterest;
         }
 
         // Прикрепляем функцию расчета платежа к событию отправки формы
