@@ -51,6 +51,11 @@
           color: #fff;
           width: 100%;
           padding: 10px;
+          cursor: pointer; /* Добавлено свойство cursor */
+        }
+
+        .submit-button:hover {
+          background-color: #45a049; /* Изменен цвет при наведении */
         }
 
         .result-container {
@@ -91,7 +96,7 @@
     <!-- Форма кредитного калькулятора -->
     <form id="loan-form">
         <div class="input-container">
-            <label>Сумма кредита:</label>
+            <label for="amount">Сумма кредита:</label>
             <input
                 type="number"
                 id="amount"
@@ -101,7 +106,7 @@
         </div>
 
         <div class="input-container">
-            <label>Процентная ставка:</label>
+            <label for="interest">Процентная ставка:</label>
             <input
                 type="number"
                 step="0.01"
@@ -112,7 +117,7 @@
         </div>
 
         <div class="input-container">
-            <label>Срок погашения:</label>
+            <label for="years">Срок погашения:</label>
             <input
                 type="number"
                 id="years"
