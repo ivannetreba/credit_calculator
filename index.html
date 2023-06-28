@@ -19,8 +19,8 @@
           border-radius: 10px;
           padding: 20px;
           box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-          max-width: 50%;
-          margin: auto;
+          max-width: 50%; /* Максимальная ширина формы */
+          margin: auto; /* Центрирование формы */
         }
 
         label {
@@ -35,26 +35,35 @@
             padding: 10px;
             border-radius: 5px;
             border: none;
-            background-color: #8bc34a; /* Зеленый цвет */
-            margin-bottom: 20px;
+            background-color: #f2f2f2;
+            margin-bottom: 20px; /* Изменено с "margin: 0 auto 20px" */
             font-size: 16px;
-            color: #fff; /* Белый цвет текста */
-            cursor: not-allowed; /* Курсор "недоступно" */
         }
 
         .input-container {
-            max-width: 400px;
-            margin: auto;
-            text-align: left;
+            max-width: 400px; /* ширина соответствует максимальной ширине поля ввода */
+            margin: auto; /* центрирует контейнер */
+            text-align: left; /* выравнивает текст по левому краю */
         }
 
-        .result-container {
+        input[type="submit"] {
+          background-color: #4caf50;
+          color: #fff;
+          width: auto; /* изменение ширины кнопки */
+          padding: 10px 20px; /* изменение отступов внутри кнопки */
+        }
+
+        input[type="submit"]:hover {
+          background-color: #3e8e41;
+        }
+
+        .result {
             background-color: #fff;
             border-radius: 10px;
             padding: 20px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-            margin: 20px auto;
-            max-width: 50%;
+            margin: 20px auto; /* Центрирование блока результатов */
+            max-width: 50%; /* Максимальная ширина блока результатов */
         }
 
         .result h2 {
@@ -86,7 +95,7 @@
     <!-- Форма кредитного калькулятора -->
     <form id="loan-form">
         <div class="input-container">
-            <label for="amount">Сумма кредита:</label>
+            <label>Сумма кредита:</label>
             <input
                 type="number"
                 id="amount"
@@ -96,7 +105,7 @@
         </div>
 
         <div class="input-container">
-            <label for="interest">Процентная ставка:</label>
+                        <label>Процентная ставка:</label>
             <input
                 type="number"
                 step="0.01"
@@ -107,7 +116,7 @@
         </div>
 
         <div class="input-container">
-            <label for="years">Срок погашения:</label>
+            <label>Срок погашения:</label>
             <input
                 type="number"
                 id="years"
@@ -116,11 +125,11 @@
             />
         </div>
 
-        <input type="submit" value="Рассчитать" class="submit-button" disabled />
+        <input type="submit" value="Рассчитать" />
     </form>
 
     <!-- Раздел результатов кредитного калькулятора -->
-    <div id="results" class="result-container"></div>
+    <div id="results" class="result"></div>
 
     <script>
         // Функция для расчета ежемесячного платежа
@@ -148,13 +157,17 @@
             var totalInterest = (totalPayment - amount).toFixed(2);
 
             // Показываем результаты
-            var resultsContainer = document.getElementById("results");
-            resultsContainer.innerHTML = `
-                <h2>Результаты</h2>
-                <p>Ежемесячный платеж: <span class="sum">${monthlyPayment}</span></p>
-                <p>Общая сумма платежа: <span class="sum">${totalPayment}</span></p>
-                <p>Переплата: <span class="sum">${totalInterest}</span></p>
-            `;
+            var html = "<h2>Результаты</h2>";
+            html +=
+                "<p>Ежемесячный платеж: <span class='sum'>" +
+                monthlyPayment +
+                "</span></p>";
+            html +=
+                "<p>Общая сумма платежа: <span class='sum'>" + totalPayment + "</span></p>";
+            html += "<p>Переплата: <span class='sum'>" + totalInterest + "</span></p>";
+
+            // Обновляем раздел результатов
+            document.getElementById("results").innerHTML = html;
         }
 
         // Прикрепляем функцию расчета платежа к событию отправки формы
@@ -165,3 +178,4 @@
     </script>
 </body>
 </html>
+
