@@ -49,6 +49,8 @@
         input[type="submit"] {
           background-color: #4caf50;
           color: #fff;
+          width: auto; /* изменение ширины кнопки */
+          padding: 10px 20px; /* изменение отступов внутри кнопки */
         }
 
         input[type="submit"]:hover {
@@ -103,13 +105,13 @@
         </div>
 
         <div class="input-container">
-            <label>Процентная ставка:</label>
+                        <label>Процентная ставка:</label>
             <input
                 type="number"
                 step="0.01"
                 id="interest"
                 placeholder="Введите процентную ставку"
-                                required
+                required
             />
         </div>
 
@@ -176,3 +178,4 @@
     </script>
 </body>
 </html>
+
