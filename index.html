@@ -136,10 +136,15 @@
         </div>
 
         <input type="submit" value="Рассчитать" />
-    </form>
 
-    <!-- Раздел результатов кредитного калькулятора -->
-    <div id="results" class="result"></div>
+        <!-- Раздел результатов кредитного калькулятора -->
+        <div id="results" class="result">
+          <h2>Результаты расчета:</h2>
+          <p id="monthly-payment">Ежемесячный платеж: <span class="sum"></span></p>
+          <p id="total-payment">Общая выплата: <span class="sum"></span></p>
+          <p id="total-interest">Общая сумма процентов: <span class="sum"></span></p>
+        </div>
+    </form>
 
     <script>
         function calculatePayment(e) {
@@ -157,8 +162,13 @@
             const monthly = (principal * x * calculatedInterest) / (x - 1);
 
             if (isFinite(monthly)) {
-                const payment = document.getElementById('results');
-                payment.innerHTML = `<h2>Результаты расчета:</h2><p>Ежемесячный платеж: <span class="sum">${monthly.toFixed(2)}</span></p><p>Общая выплата: <span class="sum">${(monthly * calculatedPayments).toFixed(2)}</span></p><p>Общая сумма процентов: <span class="sum">${((monthly * calculatedPayments) - principal).toFixed(2)}</span></p>`;
+                const monthlyPaymentElement = document.querySelector('#monthly-payment .sum');
+                const totalPaymentElement = document.querySelector('#total-payment .sum');
+                const totalInterestElement = document.querySelector('#total-interest .sum');
+
+                monthlyPaymentElement.textContent = monthly.toFixed(2);
+                totalPaymentElement.textContent = (monthly * calculatedPayments).toFixed(2);
+                totalInterestElement.textContent = ((monthly * calculatedPayments) - principal).toFixed(2);
             } else {
                 showError('Пожалуйста, проверьте введенные данные');
             }
